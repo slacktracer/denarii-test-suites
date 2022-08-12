@@ -19,7 +19,7 @@
     "lint": "eslint --cache --fix .",
     "lint-staged": "lint-staged",
     "start": "nodemon",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --setupFiles dotenv/config --watch",
     "prepare": "husky install"
   },
   "type": "module",
