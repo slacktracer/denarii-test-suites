@@ -1,0 +1,4 @@
+{
+  "exec": "NODE_OPTIONS=--experimental-vm-modules jest --setupFiles dotenv/config",
+  "ext": "js,json"
+}
