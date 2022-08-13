@@ -1,12 +1,23 @@
+import { jest } from "@jest/globals";
+
 import { accounts, userID01 } from "../../../../data/data.js";
 import { sutPath } from "../../../../data/env.js";
-import { prepareTestDatabase } from "../../../../functions/prepare-test-database.js";
 import { endConnections } from "../../../../functions/end-connections.js";
+import * as mockPersistence from "../../../../mocks/persistence.js";
 
-const { db, kv } = await import(`${sutPath}/build/persistence/persistence.js`);
+jest.unstable_mockModule(
+  `${sutPath}/persistence/persistence.js`,
+  () => mockPersistence,
+);
+
+const { prepareTestDatabase } = await import(
+  "../../../../functions/prepare-test-database.js"
+);
+
+const { db, kv } = await import(`${sutPath}/persistence/persistence.js`);
 
 const { readAccounts } = await import(
-  `${sutPath}/build/core/modules/accounts/accounts.js`
+  `${sutPath}/core/modules/accounts/accounts.js`
 );
 
 let backup;

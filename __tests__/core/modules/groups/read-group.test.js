@@ -1,13 +1,23 @@
+import { jest } from "@jest/globals";
+
 import { group01, groupID01, userID01 } from "../../../../data/data.js";
 import { sutPath } from "../../../../data/env.js";
-import { prepareTestDatabase } from "../../../../functions/prepare-test-database.js";
 import { endConnections } from "../../../../functions/end-connections.js";
 
-const { db, kv } = await import(`${sutPath}/build/persistence/persistence.js`);
+import * as mockPersistence from "../../../../mocks/persistence.js";
 
-const { readGroup } = await import(
-  `${sutPath}/build/core/modules/groups/groups.js`
+jest.unstable_mockModule(
+  `${sutPath}/persistence/persistence.js`,
+  () => mockPersistence,
 );
+
+const { prepareTestDatabase } = await import(
+  "../../../../functions/prepare-test-database.js"
+);
+
+const { db, kv } = await import(`${sutPath}/persistence/persistence.js`);
+
+const { readGroup } = await import(`${sutPath}/core/modules/groups/groups.js`);
 
 let backup;
 
