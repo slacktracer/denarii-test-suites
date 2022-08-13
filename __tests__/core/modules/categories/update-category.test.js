@@ -1,7 +1,7 @@
-import { categories, categoryID01, userID01 } from "../../../data/data.js";
-import { sutPath } from "../../../data/env.js";
-import { prepareTestDatabase } from "../../../functions/prepare-test-database.js";
-import { endConnections } from "../../../functions/end-connections.js";
+import { categories, categoryID01, userID01 } from "../../../../data/data.js";
+import { sutPath } from "../../../../data/env.js";
+import { prepareTestDatabase } from "../../../../functions/prepare-test-database.js";
+import { endConnections } from "../../../../functions/end-connections.js";
 
 const { db, kv } = await import(`${sutPath}/build/persistence/persistence.js`);
 

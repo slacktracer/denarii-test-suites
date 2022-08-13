@@ -1,11 +1,11 @@
-import { userID03, users } from "../../../data/data.js";
-import { sutPath } from "../../../data/env.js";
-import { prepareTestDatabase } from "../../../functions/prepare-test-database.js";
-import { endConnections } from "../../../functions/end-connections.js";
+import { users } from "../../../../data/data.js";
+import { sutPath } from "../../../../data/env.js";
+import { prepareTestDatabase } from "../../../../functions/prepare-test-database.js";
+import { endConnections } from "../../../../functions/end-connections.js";
 
 const { db, kv } = await import(`${sutPath}/build/persistence/persistence.js`);
 
-const { deleteUser, readUsers } = await import(
+const { readUsers } = await import(
   `${sutPath}/build/core/modules/users/users.js`
 );
 
@@ -23,13 +23,12 @@ beforeEach(async () => {
   backup.restore();
 });
 
-describe("delete user", () => {
-  test("an existing user is deleted", async () => {
+describe("read users", () => {
+  it("returns all users", async () => {
     // given
-    const expectedUserCount = users.length - 1;
+    const expectedUserCount = users.length;
 
     // when
-    await deleteUser({ userID: userID03 });
     const actualUserCount = (await readUsers()).length;
 
     // then
