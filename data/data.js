@@ -20,6 +20,10 @@ export const operationID01 = uuid();
 export const operationID02 = uuid();
 export const operationID03 = uuid();
 export const operationID04 = uuid();
+export const transferID01 = uuid();
+export const transferID02 = uuid();
+export const transferID03 = uuid();
+export const transferID04 = uuid();
 export const userID01 = uuid();
 export const userID02 = uuid();
 export const userID03 = uuid();
@@ -189,6 +193,44 @@ export const operation05 = {
 
 export const operations = [operation01, operation02, operation03, operation04];
 
+export const transfer01 = {
+  amount: 10_000_00,
+  at: new Date().toISOString(),
+  fromAccountID: accountID01,
+  toAccountID: accountID02,
+  transferID: transferID01,
+  userID: userID01,
+};
+
+export const transfer02 = {
+  amount: 10_000_00,
+  at: new Date().toISOString(),
+  fromAccountID: accountID01,
+  toAccountID: accountID02,
+  transferID: transferID02,
+  userID: userID01,
+};
+
+export const transfer03 = {
+  amount: 10_000_00,
+  at: new Date().toISOString(),
+  fromAccountID: accountID01,
+  toAccountID: accountID02,
+  transferID: transferID03,
+  userID: userID01,
+};
+
+export const transfer04 = {
+  amount: 10_000_00,
+  at: new Date().toISOString(),
+  fromAccountID: accountID01,
+  toAccountID: accountID02,
+  transferID: transferID04,
+  userID: userID01,
+};
+
+export const transfers = [transfer01, transfer02, transfer03, transfer04];
+
 export const user01 = {
   email: "mr.user@example.com",
   userID: userID01,
@@ -216,18 +258,27 @@ const insertAccountsQuery = squel
   .insert()
   .into("public.account")
   .setFieldsRows(accounts.map(convertObjectKeysFromCamelCaseToSnakeCase));
+
 const insertGroupsQuery = squel
   .insert()
   .into("public.group")
   .setFieldsRows(groups.map(convertObjectKeysFromCamelCaseToSnakeCase));
+
 const insertCategoriesQuery = squel
   .insert()
   .into("public.category")
   .setFieldsRows(categories.map(convertObjectKeysFromCamelCaseToSnakeCase));
+
 const insertOperationsQuery = squel
   .insert()
   .into("public.operation")
   .setFieldsRows(operations.map(convertObjectKeysFromCamelCaseToSnakeCase));
+
+const insertTransfersQuery = squel
+  .insert()
+  .into("public.transfer")
+  .setFieldsRows(transfers.map(convertObjectKeysFromCamelCaseToSnakeCase));
+
 const insertUsersQuery = squel
   .insert()
   .into("public.user")
@@ -240,5 +291,7 @@ ${insertAccountsQuery};
 ${insertGroupsQuery};
 
 ${insertCategoriesQuery};
+
+${insertTransfersQuery};
 
 ${insertOperationsQuery};`;
